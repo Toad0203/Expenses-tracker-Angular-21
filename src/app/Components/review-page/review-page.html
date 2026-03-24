@@ -1,17 +1,53 @@
 <div class="review-page">
   <div class="month-charts">
-    <h1>December 2025</h1>
-    <div class="charts"></div>
+    <div class="month-header">
+      <button class="month-nav" (click)="previousMonth()">◀</button>
+
+      <h1>{{ getMonthLabel() }}</h1>
+
+      <button class="month-nav" (click)="nextMonth()">▶</button>
+    </div>
+    <div class="charts">
+      <app-bar-chart
+        [expenses]="expenses"
+        [earnings]="earnings"
+        [selectedMonth]="selectedMonth"
+      ></app-bar-chart>
+    </div>
   </div>
   <div class="month-info">
-    <div class="info">
-      <h2>Money Spent</h2>
+    <div class="info summary-card">
+      <h2>Monthly Summary</h2>
+
+      <div class="summary-row">
+        <span>Money Spent</span>
+        <span>₹{{ monthlyExpenses }}</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Money Earned</span>
+        <span>₹{{ monthlyIncome }}</span>
+      </div>
+
+      <div class="summary-row balance">
+        <span>Net Balance</span>
+        <span>₹{{ monthlyBalance }}</span>
+      </div>
     </div>
-    <div class="info">
-      <h2>Money Earned</h2>
-    </div>
-    <div class="info">
-      <h2>Bills</h2>
+
+    <div class="info category-card">
+      <h2>Category Expenses</h2>
+
+      <div *ngFor="let c of categoryExpenses" class="category-row">
+        <div class="category-label">
+          <span>{{ c.category }}</span>
+          <span>₹{{ c.amount }}</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" [style.width.%]="c.percent"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,1 +1,58 @@
-<div class="personalize-page"></div>
+<div class="personalize-page">
+  <h1>Personalize</h1>
+
+  <div class="settings-grid">
+    <div class="settings-card">
+      <h2>Currency</h2>
+
+      <select [(ngModel)]="currency">
+        <option value="₹">₹ Rupee</option>
+        <option value="$">$ Dollar</option>
+        <option value="€">€ Euro</option>
+        <option value="£">£ Pound</option>
+      </select>
+    </div>
+
+    <div class="settings-card">
+      <h2>Monthly Budget</h2>
+
+      <input type="number" [(ngModel)]="monthlyBudget" />
+    </div>
+  </div>
+
+  <div class="settings-card categories-card">
+    <h2>Categories</h2>
+
+    <div class="categories-container">
+      <div class="category-chip" *ngFor="let c of settingsService.categories; let i = index">
+        <span>{{ c.name }}</span>
+
+        <input type="color" [(ngModel)]="c.color" />
+
+        <button class="remove-chip" (click)="removeCategory(i)" *ngIf="c.name !== 'Other'">
+          ✕
+        </button>
+      </div>
+
+      <!-- Add chip -->
+      <div class="category-chip add-chip" *ngIf="!showAddInput" (click)="showAddInput = true">
+        + Add
+      </div>
+
+      <div class="category-chip input-chip" *ngIf="showAddInput">
+        <div class="error" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+        <input
+          type="text"
+          [(ngModel)]="newCategory"
+          (keyup.enter)="addCategory(); showAddInput = false"
+        />
+        <button (click)="addCategory(); showAddInput = false">✔</button>
+      </div>
+    </div>
+
+    <button class="save-btn" (click)="saveSettings()">Save Settings</button>
+  </div>
+  <div class="save-toast" *ngIf="showSavedMessage">✅ Settings saved</div>
+</div>

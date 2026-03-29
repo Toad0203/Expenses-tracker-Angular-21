@@ -7,18 +7,6 @@
   justify-content: center;
 }
 
-.user-img {
-  margin-top: 20px;
-  margin-bottom: 100px;
-  height: 200px;
-  width: 200px;
-  background-image: url('../../../../Images/default-male-user-profile-icon-vector-illustration_276184-168.png');
-  background-size: contain;
-  background-position: center 20%;
-  background-size: 125%;
-  border-radius: 50%;
-}
-
 .option {
   color: black;
   text-decoration: none;
